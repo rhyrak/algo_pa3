@@ -1,9 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class RandomStudentGenerator {
     private static ArrayList<Student> students = null;
@@ -59,11 +57,7 @@ public class RandomStudentGenerator {
             generated.add(student);
         }
 
-        // shuffle
-        //generated = (ArrayList<Student>) generated.parallelStream().sorted(
-        //              (o1, o2) -> ((int) (Math.random() * 3)) - 1
-        //      )
-        //      .collect(Collectors.toList());
+        Collections.shuffle(generated);
         return generated;
     }
 

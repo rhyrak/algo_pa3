@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
+    ArrayList<Integer> primes;
     public static void main(String[] args) {
         for (int i = 0; i < 81; i++) {
             System.out.println(RandomStudentGenerator.getStudents().get(i));
@@ -49,4 +51,32 @@ public class Main {
         System.out.println();
         System.out.println("ID collisions: " + idCollisionCount);
     }
+
+    boolean checkPrimality(int num)
+    {
+        /* Exit condition */
+        if(num <= 1)
+        {
+            return false;
+        }
+        for(int i = 2; i <= num / 2; i++)
+        {
+            if((num % i) == 0)
+                return false;
+        }
+        return true;
+    }
+
+    ArrayList<Integer> genPrimes(int size) {
+        ArrayList<Integer> arr = new ArrayList<>(size);
+        int z = 0;
+        for (int i = 1; z < size; i++) {
+            if (checkPrimality(i)) {
+                arr.add(i);
+                z++;
+            }
+        }
+        return arr;
+    }
+
 }

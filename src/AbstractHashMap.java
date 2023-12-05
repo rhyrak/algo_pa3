@@ -1,36 +1,27 @@
 import java.util.ArrayList;
 
-public abstract class AbstractHashMap {
+public abstract class AbstractHashMap<K, V> {
 
-    ArrayList<Integer> primes;
-    boolean isPrime(int num)
-    {
-        /* Exit condition */
-        if(num <= 1)
-        {
-            return false;
-        }
-        for(int i = 2; i <= num / 2; i++)
-        {
-            if((num % i) == 0)
-                return false;
-        }
-        return true;
-    }
+    int capacity;
+    int size;
 
-    ArrayList<Integer> genPrimeArray(int size) {
-        ArrayList<Integer> arr = new ArrayList<>(size);
-        int z = 0;
-        for (int i = 1; z < size; i++) {
-            if (isPrime(i)) {
-                arr.add(i);
-                z++;
-            }
-        }
-        return arr;
-    }
+    ArrayList<Node<K, V>> nodes;
 
-    /* change this */
+    /* Override this in the concrete implementations */
+    AbstractHashMap(){}
+
+    /* Override this in the concrete implementations */
+    public void insertNode(K key, V value){}
+
+    /* Override this in the concrete implementations */
+    public void deleteNode(K key, V value){}
+
+    /* Override this in the concrete implementations */
+    public V getNode(K key){return null;}
+
+    public boolean isEmpty(){return size == 0;}
+
+    /* Override this in the concrete implementations */
     @Override
     public int hashCode() {
         return super.hashCode();

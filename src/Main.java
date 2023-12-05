@@ -1,9 +1,12 @@
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(RandomStudentGenerator.getStudents().get(0).name + " "
-                + RandomStudentGenerator.getStudents().get(0).lastName);
-        
+        for (int i = 0; i < 81; i++) {
+            System.out.println(RandomStudentGenerator.getStudents().get(i));
+        }
+
         printStats();
     }
 
@@ -13,12 +16,19 @@ public class Main {
         int[] randSize = new int[1000];
         int[] yearsSize = new int[24];
 
+        int idCollisionCount = 0;
+        HashMap<Integer, Student> map = new HashMap<>(81000);
+
         for (Student s : RandomStudentGenerator.getStudents()) {
             // YY-FF-DD-NNN
             randSize[s.ID % 1000]++;
             departmentSize[s.ID / 1000 % 100]++;
             facultySize[s.ID / 100000 % 100]++;
             yearsSize[s.ID / 10000000 % 100]++;
+            if (map.containsKey(s.ID))
+                idCollisionCount++;
+            else
+                map.put(s.ID, s);
         }
 
         System.out.println("Department population:");
@@ -37,5 +47,6 @@ public class Main {
         for (int i = 1; i < randSize.length; i++)
             System.out.print(randSize[i] + " ");
         System.out.println();
+        System.out.println("ID collisions: " + idCollisionCount);
     }
 }

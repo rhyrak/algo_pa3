@@ -21,9 +21,13 @@ public abstract class AbstractHashMap<K, V> {
 
     public boolean isEmpty(){return size == 0;}
 
-    /* Override this in the concrete implementations */
-    @Override
-    public int hashCode() {
+    /* Override this in the concrete CHAINING implementations */
+    public int hashCode(K key) throws Exception {
+        return super.hashCode();
+    }
+
+    /* Override this in the concrete OPEN-ADDRESSING implementations */
+    public int hashCode(K key, int i) throws Exception {
         return super.hashCode();
     }
 }

@@ -1,15 +1,23 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 public class Main {
     ArrayList<Integer> primes;
     public static void main(String[] args) {
-        for (int i = 0; i < 81; i++) {
-            System.out.println(RandomStudentGenerator.getStudents().get(i));
-        }
-
+        ArrayList<Student> students = RandomStudentGenerator.getStudents();
         printStats();
+        System.out.println();
+        ChainedHashMap chainedHashMap = new ChainedHashMap(students, 100);
+        System.out.println("Random students from chaining approach:");
+        chainedHashMap.printStudents();
+        System.out.println("\n**********************************************************\n");
+
+        ProbedHashMap probedHashMap = new ProbedHashMap(81000);
+        probedHashMap.printStudents();
+        System.out.println("Random students from probing approch:");
+
+
     }
 
     private static void printStats() {

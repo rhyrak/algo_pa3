@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class ProbedHashMap<K, V> extends AbstractHashMap<K, V>{
+public class ProbedHashMap extends AbstractHashMap {
     /* global variables */
     private int a0, a1, b0, b1, h0, h1;
 
@@ -19,14 +19,31 @@ public class ProbedHashMap<K, V> extends AbstractHashMap<K, V>{
             return ( ( a1 * key + b1 ) / 1001 ) & capacity;
     }
 
+    public void printStudents() {
+        System.out.println("I am probed approach!");
+    }
+
     @Override
-    public int hashCode(K key, int i) throws Exception {
-        if(key instanceof Integer){
-            int k = (int)key;
-            return hashFunc0(k) + ( i * hashFunc1(k));
-        }
-        else
-            throw new Exception("Incompatible Generic Type Exception");
+    public int hashCode(int key, int i) throws Exception {
+            return hashFunc0(key) + ( i * hashFunc1(key));
+    }
+
+    @Override
+    public void createTable() {
+        // TODO Auto-generated method stub
+        super.createTable();
+    }
+
+    @Override
+    public Student getNode(int key) {
+        // TODO Auto-generated method stub
+        return super.getNode(key);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        // TODO Auto-generated method stub
+        return super.isEmpty();
     }
 
 }

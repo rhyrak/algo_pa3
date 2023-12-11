@@ -2,7 +2,7 @@
 
 1) Run pa3.jar
    ```
-   java -jar pa1.jar 1Mint.txt 50Mint.txt
+   java -jar pa3.jar
    ```
 2) Compile sources & run
    ```
@@ -27,5 +27,3 @@
 * 20050111011, İbrahim Bahça
 * 20050111008, Selçuk Gençay
 * 19050111022, Furkan Demir
-
----

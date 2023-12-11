@@ -4,12 +4,10 @@ import java.util.Random;
 
 public class ChainedHashMap extends AbstractHashMap {
     int a, b;
-    int print;
     LinkedList<Student>[] table = new LinkedList[4001];
 
-    public ChainedHashMap(ArrayList<Student> list, int print) {
+    public ChainedHashMap(ArrayList<Student> list) {
         nodes = list;
-        this.print = print;
         a = 3;
         b = 17;
         for(int i = 0; i < 4001; i++)
@@ -17,10 +15,10 @@ public class ChainedHashMap extends AbstractHashMap {
     }   
 
     @Override
-    public void printStudents() {
+    public void printStudents(int count) {
         createTable();
         Random rand = new Random();
-        for(int i = 0; i < print; i++) {
+        for(int i = 0; i < count; i++) {
             System.out.println(this.getNode(nodes.get(rand.nextInt(nodes.size())).ID));
         }
     }
@@ -47,12 +45,6 @@ public class ChainedHashMap extends AbstractHashMap {
                 return s;
         }
         return null;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-
     }
 
 }

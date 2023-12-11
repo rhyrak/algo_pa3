@@ -18,15 +18,15 @@ public abstract class AbstractHashMap {
     /* Override this in the concrete implementations */
     public void createTable() {}
 
-    public void printStudents() {}
+    public void printStudents(int count) {}
 
     /* Override this in the concrete CHAINING implementations */
-    public int hashCode(int key) throws Exception {
+    public int hashCode(int key){
         return super.hashCode();
     }
 
     /* Override this in the concrete OPEN-ADDRESSING implementations */
-    public int hashCode(int key, int i) throws Exception {
+    public int hashCode(int key, int i) {
         return super.hashCode();
     }
 }

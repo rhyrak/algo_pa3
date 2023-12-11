@@ -3,20 +3,31 @@ import java.util.HashMap;
 
 
 public class Main {
-    ArrayList<Integer> primes;
     public static void main(String[] args) {
         ArrayList<Student> students = RandomStudentGenerator.getStudents();
         printStats();
         System.out.println();
-        ChainedHashMap chainedHashMap = new ChainedHashMap(students, 100);
+        ChainedHashMap chainedHashMap = new ChainedHashMap(students);
         System.out.println("Random students from chaining approach:");
-        chainedHashMap.printStudents();
+        chainedHashMap.printStudents(100);
         System.out.println("\n**********************************************************\n");
 
-        ProbedHashMap probedHashMap = new ProbedHashMap(81000);
-        probedHashMap.printStudents();
-        System.out.println("Random students from probing approch:");
+        ProbedHashMap probedHashMap = new ProbedHashMap(students);
+        System.out.println("Random students from probing approach:");
+        probedHashMap.printStudents(100);
 
+        /*
+        System.out.println();
+        System.out.println("Number of students in our database: " + students.size());
+        */
+
+        /* sanity check if any student wasn't inserted into Probed HashMap */
+
+        for(int i = 0; i < students.size(); i++){
+            if(!probedHashMap.getTable().contains(students.get(i))){
+                System.out.println("Student: " + students.get(i).ID + " at index: " + i + " is missing");
+            }
+        }
 
     }
 
@@ -58,33 +69,6 @@ public class Main {
             System.out.print(randSize[i] + " ");
         System.out.println();
         System.out.println("ID collisions: " + idCollisionCount);
-    }
-
-    boolean checkPrimality(int num)
-    {
-        /* Exit condition */
-        if(num <= 1)
-        {
-            return false;
-        }
-        for(int i = 2; i <= num / 2; i++)
-        {
-            if((num % i) == 0)
-                return false;
-        }
-        return true;
-    }
-
-    ArrayList<Integer> genPrimes(int size) {
-        ArrayList<Integer> arr = new ArrayList<>(size);
-        int z = 0;
-        for (int i = 1; z < size; i++) {
-            if (checkPrimality(i)) {
-                arr.add(i);
-                z++;
-            }
-        }
-        return arr;
     }
 
 }

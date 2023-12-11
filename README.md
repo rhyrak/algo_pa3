@@ -1,5 +1,7 @@
 ## Usage
 
+* Make sure you have `female.txt`, `last-names.txt`, and `male.txt` in the same directory with `pa3.jar`
+
 1) Run pa3.jar
    ```
    java -jar pa3.jar

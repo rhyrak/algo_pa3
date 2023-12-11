@@ -16,6 +16,7 @@ public class Main {
         final ArrayList<Integer> primes = genPrimes(13142);
         long start, finish, timeSpent;
         ArrayList<Student> students = RandomStudentGenerator.getStudents();
+        System.out.println("[INFO] Database statistics: ");
         printStats();
 
         System.out.println();
@@ -56,8 +57,8 @@ public class Main {
 
         /* sanity check if any student wasn't inserted into Probed HashMap */
 
-        for(int i = 0; i < students.size(); i++){
-            if(!probedHashMap.getTable().contains(students.get(i))){
+        for (int i = 0; i < students.size(); i++) {
+            if (!probedHashMap.getTable().contains(students.get(i))) {
                 System.out.println("Student: " + students.get(i).ID + " at index: " + i + " is missing");
             }
         }
@@ -106,16 +107,13 @@ public class Main {
     }
 
     /* check if a number is prime or not */
-    private static boolean checkPrimality(int num)
-    {
+    private static boolean checkPrimality(int num) {
         /* Exit condition */
-        if(num <= 1)
-        {
+        if (num <= 1) {
             return false;
         }
-        for(int i = 2; i <= num / 2; i++)
-        {
-            if((num % i) == 0)
+        for (int i = 2; i <= num / 2; i++) {
+            if ((num % i) == 0)
                 return false;
         }
         return true;

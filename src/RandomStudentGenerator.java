@@ -15,17 +15,19 @@ public class RandomStudentGenerator {
     private static ArrayList<Student> students = null;
 
     static {
+        System.out.println("[INFO] Loading database...");
         try (FileInputStream fileInputStream = new FileInputStream("students.db")) {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             students = (ArrayList<Student>) objectInputStream.readObject();
         } catch (Exception e) {
+            System.out.println("[INFO] students.db not found, creating a new db.");
             students = generateStudents();
 
             try (FileOutputStream fileOutputStream = new FileOutputStream("students.db")) {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
                 objectOutputStream.writeObject(students);
             } catch (IOException ex) {
-                System.out.println("Failed writing database to disk");
+                System.out.println("[ERROR] Failed writing database to disk");
             }
         }
 
@@ -47,8 +49,10 @@ public class RandomStudentGenerator {
             scanner = new Scanner(new File("last-names.txt"));
             while (scanner.hasNext())
                 lnames.add(scanner.next());
-        } catch (FileNotFoundException ex) {
-            return null;
+        } catch (FileNotFoundException e) {
+            System.out.print("[ERROR] Missing file: ");
+            System.out.println(e.getMessage());
+            System.exit(-1);
         }
 
         long start, end;

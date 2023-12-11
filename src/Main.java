@@ -4,17 +4,42 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
+        /* generate primes upto 192007 (next biggest prime number after 81000)*/
+        final ArrayList<Integer> primes = genPrimes(13142);
+        long start, finish, timeSpent;
         ArrayList<Student> students = RandomStudentGenerator.getStudents();
         printStats();
+
         System.out.println();
+        start = System.currentTimeMillis();
         ChainedHashMap chainedHashMap = new ChainedHashMap(students);
+        finish = System.currentTimeMillis();
+        timeSpent = finish - start;
+        System.out.println("Constructing HashMap with Chaining took: " + timeSpent + " ms");
+        System.out.println();
         System.out.println("Random students from chaining approach:");
+        start = System.currentTimeMillis();
         chainedHashMap.printStudents(100);
+        finish = System.currentTimeMillis();
+        timeSpent = finish - start;
+        System.out.println();
+        System.out.println("Fetching 100 random students from HashMap with Chaining took: " + timeSpent + " ms");
         System.out.println("\n**********************************************************\n");
 
-        ProbedHashMap probedHashMap = new ProbedHashMap(students);
+        start = System.currentTimeMillis();
+        ProbedHashMap probedHashMap = new ProbedHashMap(students, primes);
+        finish = System.currentTimeMillis();
+        timeSpent = finish - start;
+        System.out.println("Constructing HashMap with OpenAddressing took: " + timeSpent + " ms");
+        System.out.println();
         System.out.println("Random students from probing approach:");
+        start = System.currentTimeMillis();
         probedHashMap.printStudents(100);
+        finish = System.currentTimeMillis();
+        timeSpent = finish - start;
+        System.out.println();
+        System.out.println("Fetching 100 random students from HashMap with OpenAddressing took: " + timeSpent + " ms");
+
 
         /*
         System.out.println();
@@ -28,6 +53,7 @@ public class Main {
                 System.out.println("Student: " + students.get(i).ID + " at index: " + i + " is missing");
             }
         }
+
 
     }
 
@@ -69,6 +95,35 @@ public class Main {
             System.out.print(randSize[i] + " ");
         System.out.println();
         System.out.println("ID collisions: " + idCollisionCount);
+    }
+
+    /* check if a number is prime or not */
+    private static boolean checkPrimality(int num)
+    {
+        /* Exit condition */
+        if(num <= 1)
+        {
+            return false;
+        }
+        for(int i = 2; i <= num / 2; i++)
+        {
+            if((num % i) == 0)
+                return false;
+        }
+        return true;
+    }
+
+    /* generate N prime numbers */
+    private static ArrayList<Integer> genPrimes(int N) {
+        ArrayList<Integer> arr = new ArrayList<>(N);
+        int z = 0;
+        for (int i = 1; z < N; i++) {
+            if (checkPrimality(i)) {
+                arr.add(i);
+                z++;
+            }
+        }
+        return arr;
     }
 
 }

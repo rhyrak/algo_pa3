@@ -12,11 +12,11 @@ public class ChainedHashMap extends AbstractHashMap {
         b = 17;
         for(int i = 0; i < 4001; i++)
             table[i] = new LinkedList<Student>();
+        createTable();
     }   
 
     @Override
     public void printStudents(int count) {
-        createTable();
         Random rand = new Random();
         for(int i = 0; i < count; i++) {
             System.out.println(this.getNode(nodes.get(rand.nextInt(nodes.size())).ID));

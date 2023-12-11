@@ -8,7 +8,7 @@ public class ProbedHashMap extends AbstractHashMap {
     private final ArrayList<Integer> primes;
 
     /* Overridden Constructor */
-    ProbedHashMap(ArrayList<Student> list){
+    ProbedHashMap(ArrayList<Student> list, ArrayList<Integer> primes){
         /* initialize all those variables */
         nodes = list;
         capacity = 401;
@@ -18,13 +18,13 @@ public class ProbedHashMap extends AbstractHashMap {
         a1 = 19;
         b1 = 37;
         ratio = 80; /* double the table after it is 80% full */
-        primes = genPrimes(13142); /* generate primes upto 192007 (next biggest prime number after 81000)*/
+        this.primes = primes;
         table = new ArrayList<>(401);
+        createTable();
     }
 
 
     public void printStudents(int count) {
-        createTable();
         Random rand = new Random();
         for(int i = 0; i < count; i++) {
             System.out.println(this.getNode(nodes.get(rand.nextInt(nodes.size())).ID));
@@ -130,35 +130,6 @@ public class ProbedHashMap extends AbstractHashMap {
         for(int i = 0; i < capacity; i++){
             table.add(i, null);
         }
-    }
-
-    /* check if a number is prime or not */
-    boolean checkPrimality(int num)
-    {
-        /* Exit condition */
-        if(num <= 1)
-        {
-            return false;
-        }
-        for(int i = 2; i <= num / 2; i++)
-        {
-            if((num % i) == 0)
-                return false;
-        }
-        return true;
-    }
-
-    /* generate N prime numbers */
-    ArrayList<Integer> genPrimes(int N) {
-        ArrayList<Integer> arr = new ArrayList<>(N);
-        int z = 0;
-        for (int i = 1; z < N; i++) {
-            if (checkPrimality(i)) {
-                arr.add(i);
-                z++;
-            }
-        }
-        return arr;
     }
 
     /* sub-hash function */
